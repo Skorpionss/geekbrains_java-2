@@ -12,19 +12,23 @@ public class Main {
     public static void main(String[] args) {
 
         Obstacles[] obstacles = {
-                new Track(),
-                new Wall()
+                new Track(1000),
+                new Wall(5)
         };
 
         Participants[] participants = {
-                new Cat(),
-                new Human(),
-                new Robot()
+                new Cat(3, 100),
+                new Human(4, 2000),
+                new Robot(10, 5000)
         };
 
         for (int i = 0; i < participants.length; i++) {
+            System.out.println(participants[i].toString());
             for (int j = 0; j < obstacles.length; j++) {
                 System.out.println(obstacles[j].result(participants[i]));
+                if (!(obstacles[j].result(participants[i]))) {
+                    break;
+                }
             }
         }
     }
