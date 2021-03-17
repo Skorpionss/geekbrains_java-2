@@ -32,4 +32,15 @@ public class Massiv {
         };
         return mass;
     }
+
+    public String[][] massFF() {
+        String[][] mass = {
+                {"1", "2", "3", "4"},
+                {"1", "2", "3", "4"},
+                {"1", "2", "FF", "4"},
+                {"1", "2", "3", "4"}
+        };
+        return mass;
+    }
+
 }

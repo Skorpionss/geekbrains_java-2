@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
         DigitCalculator digitCalculator = new DigitCalculator();
         Massiv massiv = new Massiv();
-        digitCalculator.calc(massiv.mass45());
+        int summ = digitCalculator.calc(massiv.mass4());
+        System.out.println(summ);
     }
 }
