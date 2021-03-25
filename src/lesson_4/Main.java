@@ -1,5 +1,6 @@
 package lesson_4;
 
+import java.lang.annotation.Target;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -7,7 +8,7 @@ import java.util.function.Supplier;
 public class Main {
     public static void main(String[] args) {
 
-        doTask3();
+        doTask4();
     }
 
     static void doTask1() {
@@ -38,12 +39,26 @@ public class Main {
         forItem(mass, string -> System.out.println(string));
     }
 
-    static int doubleUp(int i, Supplier<Integer> sl){
+    static int doubleUp(int i, Supplier<Integer> sl) {
         return i * sl.get();
     }
 
-    static void doTask3(){
-        System.out.println(doubleUp( 10, () -> 5));
+    static void doTask3() {
+        System.out.println(doubleUp(10, () -> 5));
+    }
+
+    static Optional<String> findAllChars(String target, char toFind) {
+        char[] chars = target.toCharArray();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] == toFind) stringBuilder.append(toFind);
+        }
+        if (stringBuilder.length() > 0) return Optional.of(stringBuilder.toString());
+        return Optional.empty();
+    }
+
+    static void doTask4() {
+        System.out.println(findAllChars("ccch", 'c').get());
     }
 }
 
