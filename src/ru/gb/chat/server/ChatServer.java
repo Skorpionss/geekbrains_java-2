@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class ChatServer {
+public                                                                                          class ChatServer {
     private final AuthenticationService authenticationService;
     private final Set<ClientHandler> loggedClients;
 
@@ -16,7 +16,10 @@ public class ChatServer {
         loggedClients = new HashSet<>();
         try {
             ServerSocket serverSocket = new ServerSocket(8000);
-            Socket socket = serverSocket.accept();
+            while (true) {
+                Socket socket = serverSocket.accept();
+                new ClientHandler(socket, this);
+            }
         } catch (IOException e) {
             throw new ChatServerException("Ошибка", e);
         }
