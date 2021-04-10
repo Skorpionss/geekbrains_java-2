@@ -1,35 +1,16 @@
 package ru.gb.chat.client;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
-import java.util.Scanner;
+import ru.gb.chat.client.gui.ChatFrame;
 
 public class ChatClient {
-    public ChatClient() {
-        try {
-            Socket socket = new Socket("localhost", 8000);
-            DataInputStream in = new DataInputStream(socket.getInputStream());
-            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+    private final ChatFrame chatFrame;
+    private final ChatCommunication chatCommunication;
 
-            new Thread(() -> {
-                Scanner scanner = new Scanner(System.in);
-                while (true) {
-                    try {
-                        out.writeUTF(scanner.nextLine());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            })
-                    .start();
+    public ChatClient(String host, int port) {
+        chatCommunication = new ChatCommunication(host, port);
 
-            while (true) {
-                System.out.println(in.readUTF());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        chatFrame = new ChatFrame();
     }
 }
+
+
