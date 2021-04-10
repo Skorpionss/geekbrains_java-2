@@ -7,11 +7,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public                                                                                          class ChatServer {
+public class ChatServer {
     private final AuthenticationService authenticationService;
     private final Set<ClientHandler> loggedClients;
 
-    public ChatServer() throws IOException {
+    public ChatServer() {
         authenticationService = new AuthenticationService();
         loggedClients = new HashSet<>();
         try {
@@ -46,13 +46,10 @@ public                                                                          
 
 
     public boolean isLoggedIn(String name) {
-        Iterator<ClientHandler> iterator = loggedClients.iterator();
-        while (iterator.hasNext()) {
-            ClientHandler client = iterator.next();
-            if (client.getName().equals(name)) ;
-            return true;
-        }
-        return false;
+        return loggedClients.stream()
+                .filter(client -> client.getName().equals(name))
+                .findFirst()
+                .isPresent();
     }
 }
 
