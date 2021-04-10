@@ -1,9 +1,11 @@
 package ru.gb.chat.client;
 
-import ru.gb.chat.client.gui.ChatFrame;
-
 public class ChatStarter {
-    public static void main(String[] args) {
-        new ChatFrame();
+    public static void run() {
+        run("localhost", 8000);
+    }
+
+    public static void run(String host, int port) {
+        new ChatClient(host, port);
     }
 }
