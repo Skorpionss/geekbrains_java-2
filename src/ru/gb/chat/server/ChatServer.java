@@ -25,27 +25,27 @@ public class ChatServer {
         }
     }
 
-    public AuthenticationService getAuthenticationService() {
+    public synchronized AuthenticationService getAuthenticationService() {
         return authenticationService;
     }
 
 
-    public void subscribe(ClientHandler clientHandler) {
+    public synchronized void subscribe(ClientHandler clientHandler) {
         loggedClients.add(clientHandler);
     }
 
-    public void unsubscribe(ClientHandler clientHandler) {
+    public synchronized void unsubscribe(ClientHandler clientHandler) {
         loggedClients.remove(clientHandler);
     }
 
-    public void broadcast(String message) {
+    public synchronized void broadcast(String message) {
         for (ClientHandler clientHandler : loggedClients) {
             clientHandler.sendMessage(message);
         }
     }
 
 
-    public boolean isLoggedIn(String name) {
+    public synchronized boolean isLoggedIn(String name) {
         return loggedClients.stream()
                 .filter(client -> client.getName().equals(name))
                 .findFirst()
