@@ -1,11 +1,14 @@
 package ru.gb.chat.client.gui;
 
+import ru.gb.chat.client.gui.api.Receiver;
 import ru.gb.chat.client.gui.api.Sender;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ChatFrame extends JFrame {
+    private final JTextArea chatArea;
+
     public ChatFrame(Sender sender) {
         setTitle("Chat v1.0");
         setBounds(20, 20, 400, 500);
@@ -15,7 +18,7 @@ public class ChatFrame extends JFrame {
 
         JPanel top = new JPanel();
         top.setLayout(new BorderLayout());
-        JTextArea chatArea = new JTextArea();
+        chatArea = new JTextArea();
         chatArea.setEditable(false);
         top.add(chatArea, BorderLayout.CENTER);
 
@@ -33,6 +36,15 @@ public class ChatFrame extends JFrame {
         add(bottom, BorderLayout.SOUTH);
 
         setVisible(true);
+    }
+
+    public Receiver getReceiver() {
+        return (message) -> {
+            if (!message.isEmpty()) {
+                chatArea.append("\n");
+                chatArea.append(message);
+            }
+        };
     }
 
 }
